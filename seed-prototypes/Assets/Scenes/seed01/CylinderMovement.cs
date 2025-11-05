@@ -3,21 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 
-public class CylinderMovement : MonoBehaviour
+public class CylinderMovement : ObjectMovement
 {
     private Rigidbody rb;
     [SerializeField] float moveSpeed, rotationTilt;
-    public bool cylinderCanRoll;
+    //public bool cylinderCanRoll;
     void Start() 
     {
         rb = GetComponent<Rigidbody>();
 
-        cylinderCanRoll = false;
+        canRoll = false;
     }
 
     public void FixedUpdate()
     {
-        if (cylinderCanRoll == true)
+        if (canRoll == true)
         {
             float upDown = Input.GetAxis("Vertical");
             float leftRight = Input.GetAxis("Horizontal");

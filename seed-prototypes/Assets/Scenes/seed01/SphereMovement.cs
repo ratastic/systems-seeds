@@ -2,18 +2,17 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class SphereMovement : MonoBehaviour
+public class SphereMovement : ObjectMovement
 {
     public float speed = 5f;
     private Rigidbody rb;
-    public bool ballRolling;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    //public bool ballRolling;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        ballRolling = false;
+        canRoll = false;
 
-        if (ballRolling == true)
+        if (canRoll == true)
         {
             BallRoll();
         }

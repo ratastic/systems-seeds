@@ -2,19 +2,18 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class CubeMovement : MonoBehaviour
+public class CubeMovement : ObjectMovement
 {
     [SerializeField] private float rollSpeed = 3f;
     private bool isMoving;
-    private bool cubeCanRoll;
-    public CylinderMovement cm;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    //private bool cubeCanRoll;
+    //public CylinderMovement cm;
+    //public CameraFollow cf;
+
     void Start()
     {
-        cubeCanRoll = true;
+        canRoll = true;
     }
-
-    // Update is called once per frame
     void Update()
     {
         if (isMoving) return;
@@ -29,7 +28,7 @@ public class CubeMovement : MonoBehaviour
             var anchor = transform.position + (Vector3.down + dir) * .5f;
             var axis = Vector3.Cross(Vector3.up, dir);
 
-            if (cubeCanRoll == true)
+            if (canRoll == true)
             {
                 StartCoroutine(Roll(anchor, axis));
             }
@@ -49,13 +48,17 @@ public class CubeMovement : MonoBehaviour
         isMoving = false;
     }
 
-    public void OnCollisionEnter(Collision col)
-    {
-        if (col.gameObject.CompareTag("cylinder"))
-        {
-            Debug.Log("collided with cylinder");
-            cubeCanRoll = false;
-            cm.cylinderCanRoll = true;
-        }
-    }
+    // public void OnCollisionEnter(Collision col)
+    // {
+    //     //GameObject other = col.gameObject;
+
+    //     if (col.gameObject.CompareTag("cylinder"))
+    //     {
+    //         Debug.Log("collided with cylinder");
+    //         cubeCanRoll = false;
+    //         cm.cylinderCanRoll = true;
+
+    //         cf.target = col.gameObject.GetComponent<Transform>();
+    //     }
+    // }
 }
