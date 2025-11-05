@@ -16,7 +16,7 @@ public class CubeMovement : ObjectMovement
     }
     void Update()
     {
-        Debug.Log(canRoll);
+        //Debug.Log(canRoll);
         if (isMoving) return;
 
         if (Input.GetKey(KeyCode.W)) Assemble(Vector3.forward);
@@ -29,37 +29,26 @@ public class CubeMovement : ObjectMovement
             var anchor = transform.position + (Vector3.down + dir) * .5f;
             var axis = Vector3.Cross(Vector3.up, dir);
 
-            if (canRoll == true)
+            if (canRoll == true && isMoving == false)
             {
-                StartCoroutine(Roll(anchor, axis));
+                transform.RotateAround(anchor, axis, rollSpeed * Time.deltaTime);
+                //StartCoroutine(Roll(anchor, axis));
             }
         }
     }
 
-    IEnumerator Roll(Vector3 anchor, Vector3 axis)
-    {
-        isMoving = true;
-
-        for (int i = 0; i < (90 / rollSpeed); i++)
-        {
-            transform.RotateAround(anchor, axis, rollSpeed);
-            yield return new WaitForSeconds(.01f);
-        }
-
-        isMoving = false;
-    }
-
-    // public void OnCollisionEnter(Collision col)
+    // IEnumerator Roll(Vector3 anchor, Vector3 axis)
     // {
-    //     //GameObject other = col.gameObject;
+    //     isMoving = true;
 
-    //     if (col.gameObject.CompareTag("cylinder"))
-    //     {
-    //         Debug.Log("collided with cylinder");
-    //         cubeCanRoll = false;
-    //         cm.cylinderCanRoll = true;
+    //     // for (int i = 0; i < (90 / rollSpeed); i++)
+    //     // {
+    //     //     transform.RotateAround(anchor, axis, rollSpeed);
+    //     // }
 
-    //         cf.target = col.gameObject.GetComponent<Transform>();
-    //     }
+    //     transform.RotateAround(anchor, axis, rollSpeed);
+    //     yield return new WaitForSeconds(.01f);
+
+    //     isMoving = false;
     // }
 }
