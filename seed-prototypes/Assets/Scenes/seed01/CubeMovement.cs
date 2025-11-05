@@ -6,10 +6,12 @@ public class CubeMovement : MonoBehaviour
 {
     [SerializeField] private float rollSpeed = 3f;
     private bool isMoving;
+    private bool cubeCanRoll;
+    public CylinderMovement cm;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        cubeCanRoll = true;
     }
 
     // Update is called once per frame
@@ -26,7 +28,11 @@ public class CubeMovement : MonoBehaviour
         {
             var anchor = transform.position + (Vector3.down + dir) * .5f;
             var axis = Vector3.Cross(Vector3.up, dir);
-            StartCoroutine(Roll(anchor, axis));
+
+            if (cubeCanRoll == true)
+            {
+                StartCoroutine(Roll(anchor, axis));
+            }
         }
     }
 
@@ -41,5 +47,15 @@ public class CubeMovement : MonoBehaviour
         }
 
         isMoving = false;
+    }
+
+    public void OnCollisionEnter(Collision col)
+    {
+        if (col.gameObject.CompareTag("cylinder"))
+        {
+            Debug.Log("collided with cylinder");
+            cubeCanRoll = false;
+            cm.cylinderCanRoll = true;
+        }
     }
 }
