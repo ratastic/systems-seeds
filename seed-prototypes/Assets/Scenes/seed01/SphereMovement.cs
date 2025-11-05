@@ -11,7 +11,10 @@ public class SphereMovement : ObjectMovement
     {
         rb = GetComponent<Rigidbody>();
         canRoll = false;
+    }
 
+    void Update()
+    {
         if (canRoll == true)
         {
             BallRoll();

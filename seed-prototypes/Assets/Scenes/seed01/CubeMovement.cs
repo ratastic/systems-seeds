@@ -16,6 +16,7 @@ public class CubeMovement : ObjectMovement
     }
     void Update()
     {
+        Debug.Log(canRoll);
         if (isMoving) return;
 
         if (Input.GetKey(KeyCode.W)) Assemble(Vector3.forward);

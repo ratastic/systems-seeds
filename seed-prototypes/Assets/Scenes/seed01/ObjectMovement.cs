@@ -8,6 +8,8 @@ public class ObjectMovement : MonoBehaviour
     public bool canRoll = false;
     public void OnCollisionEnter(Collision col)
     {
+        if (canRoll == false) return;
+
         GameObject other = col.gameObject;
 
         if (other.TryGetComponent<ObjectMovement>(out ObjectMovement om))
