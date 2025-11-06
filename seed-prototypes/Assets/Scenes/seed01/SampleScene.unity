@@ -935,7 +935,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cf: {fileID: 330585548}
   canRoll: 0
-  rollSpeed: 3
+  rollSpeed: 500
 --- !u!65 &1996581837
 BoxCollider:
   m_ObjectHideFlags: 0
