@@ -11,6 +11,7 @@ public class CamController : MonoBehaviour
     public GameObject gridContainer; // display images in a grid
     public GameObject imagePrefab; // to instantiate new images
     public GameObject imageCanvas; // canvas that plasters the images on screen
+    public GameObject camFrame;
 
     public List<GameObject> capturedImages = new List<GameObject>(); // to store new images within a 3x2 grid
 
@@ -27,6 +28,7 @@ public class CamController : MonoBehaviour
     {
         canTakePic = false;
         imageCanvas.SetActive(false);
+        camFrame.SetActive(!camFrame.activeSelf);
 
         if (cameraToCapture != null) // if in use
         {
@@ -41,13 +43,20 @@ public class CamController : MonoBehaviour
         if (Input.GetKeyDown("x")) // set up cam frame ui
         {
             Debug.Log("can take picture");
-            canTakePic = true;
+            canTakePic = !canTakePic;
+            camFrame.SetActive(true);
         } 
 
         if (Input.GetKeyDown("c") && canTakePic == true)
         {
             CaptureImage();
             Debug.Log("cam button pressed");
+        }
+
+        if (imageCanvas.activeSelf == true)
+        {
+            canTakePic = false;
+            camFrame.SetActive(false);
         }
     }
 
