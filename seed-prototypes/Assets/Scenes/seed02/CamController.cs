@@ -15,13 +15,18 @@ public class CamController : MonoBehaviour
     public List<GameObject> capturedImages = new List<GameObject>(); // to store new images within a 3x2 grid
 
     private bool canTakePic;
+
+    void OnGUI()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         canTakePic = false;
         imageCanvas.SetActive(false);
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
 
         if (cameraToCapture != null) // if in use
         {
@@ -56,6 +61,7 @@ public class CamController : MonoBehaviour
         // applies pixels from render texture to captured texture
         capturedTexture.ReadPixels(new Rect(0, 0, renderTexture.width, renderTexture.height), 0, 0);
         capturedTexture.Apply();
+        RenderTexture.active = null;
 
         GameObject newImageObj = Instantiate(imagePrefab, gridContainer.transform);
         Image newImage = newImageObj.GetComponent<Image>();
@@ -68,6 +74,6 @@ public class CamController : MonoBehaviour
 
     public void OpenDisplay()
     {
-        imageCanvas.SetActive(true);
+        imageCanvas.SetActive(!imageCanvas.activeSelf);
     }
 }
